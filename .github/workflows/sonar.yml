@@ -32,7 +32,7 @@ jobs:
       # Passo 4: Rodar os testes (se necessário)
       - name: Run tests
         run: |
-          vitest run
+          npm run test
 
       # Passo 5: Instalar o SonarScanner
       - name: Install SonarScanner
