@@ -46,8 +46,7 @@ jobs:
       - name: Run SonarQube scanner
         run: |
           sonar-scanner \
-            -Dsonar.projectKey=justRenzinza_biblioteca-calc
-            -Dsonar.projectName="biblioteca-calc" \
+            -Dsonar.projectKey=ArthurCremasco_Ts_Calculator_Sonar_CI
             -Dsonar.sources=./my-ts-library/src \
             -Dsonar.tests=./my-ts-library/src \
             -Dsonar.host.url=$SONAR_HOST_URL \
