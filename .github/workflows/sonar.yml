@@ -52,9 +52,3 @@ jobs:
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN
 
-    # Definindo variáveis de ambiente seguras
-    env:
-      SONAR_HOST_URL: ${{ https://sonarcloud.io }}
-      SONAR_TOKEN: ${{ c1cd45fe395b531d4c59ef3556ff9bbd04ebbcb3 }}
-
-
