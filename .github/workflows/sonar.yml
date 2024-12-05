@@ -49,6 +49,6 @@ jobs:
             -Dsonar.projectKey=ArthurCremasco_Ts_Calculator_Sonar_CI
             -Dsonar.sources=./my-ts-library/src \
             -Dsonar.tests=./my-ts-library/src \
-            -Dsonar.host.url=$SONAR_HOST_URL \
+            -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
 
