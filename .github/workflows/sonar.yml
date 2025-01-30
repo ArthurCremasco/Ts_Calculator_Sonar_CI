@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: SonarQube Analysis
 
 on:
   push:
@@ -8,8 +8,8 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  ci:
-    name: CI Pipeline
+  sonarqube:
+    name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -34,3 +34,8 @@ jobs:
       - name: Run tests with Vitest
         run: |
           npm test
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
