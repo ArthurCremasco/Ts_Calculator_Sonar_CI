@@ -1,23 +1,38 @@
 {
-  "name": "nodejs-typescript",
-  "version": "1.0.0",
-  "main": "index.ts",
-  "type": "module",
+  "name": "my-ts-library",
+  "version": "0.1.0",
+  "description": "My TypeScript Library",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "sonar": "node sonar-runner.js"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "node-fetch": "^3.3.1"
+  "keywords": [
+    "typescript",
+    "library"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/my-ts-library"
   },
+  "bugs": {
+    "url": "https://github.com/your-username/my-ts-library/issues"
+  },
+  "homepage": "https://github.com/your-username/my-ts-library#readme",
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "tsup": "^8.3.5",
-    "tsx": "^4.7.1",
-    "typescript": "^5.7.2",
-    "vitest": "^2.1.8"
-  },
-  "keywords": [],
-  "description": ""
+    "@vitest/coverage-v8": "^2.1.8",
+    "sonarqube-scanner": "^4.2.6",
+    "vitest": "^2.1.8",
+    "vitest-sonar-reporter": "^2.0.0"
+  }
 }

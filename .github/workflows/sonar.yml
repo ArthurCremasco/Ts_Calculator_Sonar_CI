@@ -3,52 +3,30 @@ name: SonarQube Analysis
 on:
   push:
     branches:
-      - main  # A análise será executada quando houver um push para a branch main
+      - main
   pull_request:
-    branches:
-      - main  # Também será executado quando você abrir um PR para a branch main
+    types: [opened, synchronize, reopened]
 
 jobs:
-  sonar:
-    name: Run SonarQube Analysis
+  sonarqube:
+    name: SonarCloud
     runs-on: ubuntu-latest
-
     steps:
-      # Passo 1: Verificar o repositório
-      - name: Check out the code
-        uses: actions/checkout@v3
-
-      # Passo 2: Configurar Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
         with:
-          node-version: '18'  # Coloque a versão do Node.js que seu projeto usa
-
-      # Passo 3: Instalar as dependências do projeto (usando npm ou yarn)
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
       - name: Install dependencies
         run: |
-          npm install
-
-      # Passo 4: Rodar os testes (se necessário)
-      - name: Run tests
+          python -m pip install --upgrade pip
+          pip install coverage
+      - name: Run tests with coverage
         run: |
-          vitest run
-
-      # Passo 5: Instalar o SonarScanner
-      - name: Install SonarScanner
-        run: |
-          wget -qO - https://downloads.sonarsource.com/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip > sonar-scanner.zip
-          unzip sonar-scanner.zip
-          sudo mv sonar-scanner-4.6.2.2472-linux /usr/local/sonar-scanner
-          export PATH=$PATH:/usr/local/sonar-scanner/bin
-
-      # Passo 6: Rodar a análise do SonarQube
-      - name: Run SonarQube scanner
-        run: |
-          sonar-scanner \
-            -Dsonar.projectKey=ArthurCremasco_Ts_Calculator_Sonar_CI
-            -Dsonar.sources=./my-ts-library/src \
-            -Dsonar.tests=./my-ts-library/src \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN
-
+          python -m unittest discover
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
